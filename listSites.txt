@@ -1,0 +1,33 @@
+10
+hardware.com 6 tecnologia computador hardware peça manutenção preço 
+games.com 6 computador preço jogo console promoção on-line
+opiniao.com 6 jogo melhor computador console smartphone tecnologia
+shopping.com 6 computador promoção preço console smartphone calçado 
+videos.com 6 tecnologia notícia filme futebol console melhor
+bet.com 6 jogo aposta promoção premiação on-line preço 
+wiki.com 6 computador hardware smartphone ator filme tecnologia
+tv.com 6 notícia entrevista filme ator série jogo
+jornal.com 6 notícia entrevista manchete on-line matéria filme
+esporte.com 6 jogo futebol resultado on-line entrevista melhor
+21
+hardware.com games.com 2
+hardware.com wiki.com 2
+hardware.com bet.com 2
+hardware.com videos.com 2
+hardware.com shopping.com 2
+games.com bet.com 3
+games.com videos.com 3
+games.com hardware.com 3
+opiniao.com wiki.com 1
+opiniao.com games.com 1
+shopping.com videos.com 3
+videos.com bet.com 7
+videos.com shopping.com 7
+bet.com esporte.com 4
+tv.com shopping.com 1
+tv.com videos.com 1
+tv.com jornal.com 1
+jornal.com esporte.com 2
+jornal.com videos.com 2
+esporte.com jornal.com 2
+esporte.com videos.com 2
