@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "Site.h"
 #include <string.h>
+#include <stdlib.h>
 
 Site *Site_create(char *nome, char palavras[][30], int qtdPalavras){
     Site *s = malloc(sizeof(Site));
@@ -38,7 +39,7 @@ void Site_print(Site *s){
     printf("Importância: %d\n", s->importancia);
     printf("Palavras-chave (%d): ", s->qtdPalavras);
 
-    for(int i = 0; i < s->palavras; i++){
+    for(int i = 0; i < s->qtdPalavras; i++){
         printf("%s ", s->palavras[i]);
     }
 
@@ -60,7 +61,7 @@ void Graph_insertLink(Graph *g, Site *origem, Site *destino, int peso){
     }
 
     Vertex *v1 = Graph_findByValue(g, origem, Site_cmp);
-    Vertex *v2 = Graph_findByValue(g, origem, Site_cmp);
+    Vertex *v2 = Graph_findByValue(g, destino, Site_cmp);
 
     if(v1 == NULL || v2 == NULL){
         printf("Erro: site de origem ou destino não encontrado no grafo.");
@@ -68,7 +69,7 @@ void Graph_insertLink(Graph *g, Site *origem, Site *destino, int peso){
     }
 
     int *p = malloc(sizeof(int));
-
+    *p = peso;
     Graph_insertEdge(g, v1->label, v2->label, p);
 }
 
@@ -108,6 +109,17 @@ void Graph_calcularImportancia(Graph *g){
     }
 }
 
+void imprimirImportancia(Graph *g) {
+    Vertex *v = g->first;
+
+    printf("\n=== Importância dos Sites ===\n");
+    while (v) {
+        Site *s = (Site*) v->value;
+        printf("%s -> importância = %d\n", s->nome, s->importancia);
+        v = v->next;
+    }
+}
+
 void graph_lerArquivo(Graph *g, const char *nomeArquivo){
     FILE *f = fopen(nomeArquivo, "r");
     if(f == NULL){
@@ -126,7 +138,11 @@ void graph_lerArquivo(Graph *g, const char *nomeArquivo){
         int qtdpalavras;
         char palavras[15][30];
 
-        fscanf(f, "%s %d", nome, qtdpalavras);
+        fscanf(f, "%s %d", nome, &qtdpalavras);
+
+        for (int j = 0; j < qtdpalavras; j++) {
+            fscanf(f, "%29s", palavras[j]);
+        }
 
         sites[i] = Site_create(nome, palavras, qtdpalavras);
         Graph_insertSite(g, sites[i]);
