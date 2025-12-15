@@ -53,7 +53,7 @@ int Site_cmp(void *a, void *b){
     return strcmp(s1->nome, s2->nome);
 }
 
-void Graph_insertLink(Graph *g, Site *origem, Site *destino){
+void Graph_insertLink(Graph *g, Site *origem, Site *destino, int peso){
     if(g == NULL || origem == NULL || destino == NULL){
         printf("Erro: parâmetros inválidos.\n");
         return;
@@ -67,7 +67,9 @@ void Graph_insertLink(Graph *g, Site *origem, Site *destino){
         return;
     }
 
-    Graph_insertEdge(g, v1->label, v2->label, NULL);
+    int *p = malloc(sizeof(int));
+
+    Graph_insertEdge(g, v1->label, v2->label, p);
 }
 
 void Graph_calcularImportancia(Graph *g){
@@ -78,7 +80,7 @@ void Graph_calcularImportancia(Graph *g){
     //para cada vertice do gráfico
     while(vAtual){
 
-        int grauEntrada = 0;
+        int somaPesos = 0;
         Vertex *vAux = g->first;
 
         //percorre todos os vertices procurando arestas que apontam para vAtual
@@ -87,7 +89,10 @@ void Graph_calcularImportancia(Graph *g){
 
             while(e){
                 if(e->head == vAtual){
-                    grauEntrada++;
+                    int *peso = (int*) e->value;
+                    if (peso){
+                        somaPesos += *peso;
+                    }
                 }
                 e = e->next;
             }
@@ -96,9 +101,61 @@ void Graph_calcularImportancia(Graph *g){
 
         //atualiza a importância do site
         Site *site = (Site*) vAtual->value;
-        site->importancia = grauEntrada;
+        site->importancia = somaPesos;
 
         vAtual = vAtual->next;
 
     }
+}
+
+void graph_lerArquivo(Graph *g, const char *nomeArquivo){
+    FILE *f = fopen(nomeArquivo, "r");
+    if(f == NULL){
+        printf("Erro ao abrir arquivo.\n");
+        return;
+    }
+
+    int qtdSites;
+    fscanf(f, "%d", &qtdSites);
+
+    Site *sites[qtdSites];
+
+    for(int i = 0; i < qtdSites; i++){
+
+        char nome[50];
+        int qtdpalavras;
+        char palavras[15][30];
+
+        fscanf(f, "%s %d", nome, qtdpalavras);
+
+        sites[i] = Site_create(nome, palavras, qtdpalavras);
+        Graph_insertSite(g, sites[i]);
+    }
+
+    //leitura de arestas
+    int qtdArestas;
+    fscanf(f, "%d", &qtdArestas);
+
+    for(int i = 0; i < qtdArestas; i++){
+
+        char origem[50], destino[50];
+        int peso;
+        fscanf(f, "%s %s %d", origem, destino, &peso);
+
+        Site sOrigemTemp, sDestinoTemp;
+        strcpy(sOrigemTemp.nome, origem);
+        strcpy(sDestinoTemp.nome, destino);
+
+        Vertex *vOrigem = Graph_findByValue(g, &sOrigemTemp, Site_cmp);
+        Vertex *vDestino = Graph_findByValue(g, &sDestinoTemp, Site_cmp);
+
+        if(vOrigem && vDestino){
+            int *p = malloc(sizeof(int));
+            *p = peso;
+
+            Graph_insertEdge(g, vOrigem->label, vDestino->label, p);
+        }
+    }
+
+    fclose(f);
 }
