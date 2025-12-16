@@ -74,39 +74,39 @@ void Graph_insertLink(Graph *g, Site *origem, Site *destino, int peso){
 }
 
 void Graph_calcularImportancia(Graph *g){
-    if(g == NULL) return;
+    if (!g) return;
 
-    Vertex *vAtual = g->first;
-
-    //para cada vertice do gráfico
-    while(vAtual){
-
-        int somaPesos = 0;
-        Vertex *vAux = g->first;
-
-        //percorre todos os vertices procurando arestas que apontam para vAtual
-        while(vAux){
-            Edge *e = vAux->first;
-
-            while(e){
-                if(e->head == vAtual){
-                    int *peso = (int*) e->value;
-                    if (peso){
-                        somaPesos += *peso;
-                    }
-                }
-                e = e->next;
-            }
-            vAux = vAux->next;
-        }
-
-        //atualiza a importância do site
-        Site *site = (Site*) vAtual->value;
-        site->importancia = somaPesos;
-
-        vAtual = vAtual->next;
-
+    // 1. Zera a importância de todos os sites primeiro
+    Vertex *v = g->first;
+    while (v) {
+        Site *s = (Site*) v->value;
+        s->importancia = 0;
+        v = v->next;
     }
+
+    // 2. Percorre o grafo somando pesos nos destinos
+    v = g->first;
+    while (v) {
+        // Para cada vértice, percorre suas arestas (links de saída)
+        Edge *e = v->first;
+        while (e) {
+            // e->head é o vértice de destino
+            // e->value é o peso (conforme Graph_insertLink em Site.c)
+            
+            Vertex *destino = e->head;
+            int *peso = (int*) e->value;
+
+            if (destino && peso) {
+                Site *siteDestino = (Site*) destino->value;
+                
+                // Regra: Soma dos pesos das arestas que CHEGAM
+                siteDestino->importancia += *peso;
+            }
+            e = e->next;
+        }
+        v = v->next;
+    }
+
 }
 
 void imprimirImportancia(Graph *g) {
@@ -174,4 +174,30 @@ void graph_lerArquivo(Graph *g, const char *nomeArquivo){
     }
 
     fclose(f);
+}
+
+List *buscarSitesPorPalavra(Graph *g, char *termo) {
+    List *resultados = List_alloc();
+    
+    if (!g || !termo) return resultados;
+
+    // Acessando a estrutura interna do grafo conforme padrão visto em Site.c
+    Vertex *v = g->first; 
+
+    while (v) {
+        Site *s = (Site*) v->value;
+        
+        // Verifica se a palavra está na lista de palavras-chave do site
+        for (int i = 0; i < s->qtdPalavras; i++) {
+            // Comparação de string segura
+            if (strcmp(s->palavras[i], termo) == 0) {
+                List_insert(resultados, s);
+                break; // Palavra encontrada, não precisa verificar as outras deste site
+            }
+        }
+        
+        v = v->next;
+    }
+
+    return resultados;
 }
