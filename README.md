@@ -23,21 +23,22 @@ A implementação prioriza modularidade, clareza de código e boas práticas de 
 
 ## Estrutura do projeto
 ```
-├── src/
-│   ├── Graph.c
-│   ├── Graph.h
-│   ├── Site.c
-│   ├── Site.h
-│   └── main.c
-├── docs/
-│   └── listSites.txt
-├── README.md
+├── Graph.c
+├── Graph.h
+├── List.c
+├── List.h
+├── Site.c
+├── Site.h
+├── teste.c
+├── listSites.txt
+└── README.md
 ```
+Os arquivos do projeto estão organizados na raiz do repositório, concentrando os módulos principais (grafo, lista e site) e os arquivos de teste, visando simplicidade e clareza no desenvolvimento acadêmico.
 
 ## Descriçao dos arquivos
 - **Graph.h / Graph.c**: Definição e implementação do TAD Grafo, feitos em aula.
 - **Site.h / Site.c**: Definição da estrutura `Site` e funções associadas.
-- **main.c**: Função principal responsável por testar e integrar os módulos.
+- **teste.c**: Função principal responsável por testar e integrar os módulos.
 - **listSites.txt**:  Arquivo contendo o nome dos sites, palavras chave e relação com pesos entre sites.
 - **README.md**: Documentação do projeto
 
@@ -79,7 +80,7 @@ gcc *.c -o executavel
 ## Organização da Equipe
 - **HERIK:** Modelagem dos Sites + Carga de Dados + Conexão ao Grafo
 - **PEDRO MATHEUS:** Cálculo da Importância + Busca de Palavras
-- **JOÃO ALISON:** Ordenação + Exibição + Programa Principal (main.c)
+- **JOÃO ALISON:** Ordenação + Exibição + Programa Principal (teste.c)
 
 ## Observações Finais
 
