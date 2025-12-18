@@ -3,7 +3,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-Site *Site_create(char *nome, char palavras[][30], int qtdPalavras){
+Site *Site_alloc(char *nome, char palavras[][30], int qtdPalavras){
     Site *s = malloc(sizeof(Site));
     if(s == NULL){
         printf("Erro ao alocar memória para Site.\n");
@@ -144,7 +144,7 @@ void graph_lerArquivo(Graph *g, const char *nomeArquivo){
             fscanf(f, "%29s", palavras[j]);
         }
 
-        sites[i] = Site_create(nome, palavras, qtdpalavras);
+        sites[i] = Site_alloc(nome, palavras, qtdpalavras);
         Graph_insertSite(g, sites[i]);
     }
 

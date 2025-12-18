@@ -11,7 +11,7 @@ typedef struct{
 }Site;
 
 void  Graph_insertSite(Graph *g, Site *site); 
-Site *Site_create(char *nome, char palavras[][30], int qtdPalavras);
+Site *Site_alloc(char *nome, char palavras[][30], int qtdPalavras);
 void  Site_print(Site *s);
 int   Site_cmp(void *a, void *b);
 void  Graph_insertLink(Graph *g, Site *origem, Site *destino, int p);
