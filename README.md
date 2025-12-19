@@ -1,4 +1,4 @@
-# Projeto - Estrutura de Dados (Grafo de Sites)
+# Projeto - Estrutura de Dados (Buscador Google da UVA)
 **Docente:** 
   - Prof. Dr. Paulo Regis Menezes Sousa
 
