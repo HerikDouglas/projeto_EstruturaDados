@@ -1,31 +1,36 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "Site.h"
 #include "List.h"
+//#include "Graph.h"
 
-// Função auxiliar para imprimir a lista de resultados da busca
-void print_site_callback(void *item) {
-    Site *s = (Site*)item;
-    printf("- %s (Imp: %d)\n", s->nome, s->importancia);
-}
-
-int main(){
+int main() {
     Graph *g = Graph_alloc();
 
-    printf("1. Carregando Grafo...\n");
+    // Limpa a tela
+    system("clear || cls");
+
+    printf("\x1b[1;33mCarregando base de dados...\x1b[0m\n");
     graph_lerArquivo(g, "listSites.txt");
 
-    printf("2. Calculando Importancia...\n");
-    Graph_calcularImportancia(g); 
+    // Cálculo da Pessoa 2
+    Graph_calcularImportancia(g);
 
-    imprimirImportancia(g);
-
-    printf("\n3. Testando Busca por Palavra 'computador'...\n");
-    List *resultados = buscarSitesPorPalavra(g, "computador");
+    printf("\n\x1b[1;34m==========================================\n");
+    printf("        BUSCADOR GOOGLE DA UVA          \n");
+    printf("==========================================\x1b[0m\n");
     
-    printf("Sites encontrados com 'computador': %d\n", List_getLength(resultados));
-    List_print(resultados, print_site_callback);
+    char termo[30];
+    printf("\nO que voce deseja encontrar? ");
+    scanf("%29s", termo);
 
+    // Busca da Pessoa 2
+    List *resultados = buscarSitesPorPalavra(g, termo);
+
+    // Ordenação e Exibição da Pessoa 3 (Você)
+    ordenarSites(resultados);exibirResultados(resultados);
+
+    // Limpeza
     List_free(resultados);
-    Graph_free(g);
     return 0;
 }

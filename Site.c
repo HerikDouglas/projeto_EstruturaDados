@@ -201,3 +201,77 @@ List *buscarSitesPorPalavra(Graph *g, char *termo) {
 
     return resultados;
 }
+
+//minha parte
+// Definições necessárias para manipular a lista internamente// --- PARTE DA PESSOA 3: ORDENAÇÃO E EXIBIÇÃO COLORIDA ---
+
+// Cores ANSI para o terminal
+#define RESET   "\x1b[0m"
+#define BOLD    "\x1b[1m"
+#define GREEN   "\x1b[32m"
+#define YELLOW  "\x1b[33m"
+#define BLUE    "\x1b[34m"
+#define CYAN    "\x1b[36m"
+#define RED     "\x1b[31m"
+
+// Definição das estruturas internas da Lista (necessário para a ordenação)
+typedef struct Node Node;
+struct Node {
+    void *value;
+    Node *next;
+};
+
+struct List {
+    int length;
+    Node *first;
+    Node *last;
+};
+
+void Site_print_colorido(Site *s) {
+    printf(BLUE "--------------------------------------------------\n" RESET);
+    printf(BOLD CYAN " Site: " RESET YELLOW "%-15s" RESET, s->nome);
+    printf(BOLD CYAN " | Relevancia: " RESET GREEN "[ %d ]\n" RESET, s->importancia);
+    printf(CYAN " Palavras-chave: " RESET);
+    
+    for(int i = 0; i < s->qtdPalavras; i++){
+        printf("%s%s", s->palavras[i], (i < s->qtdPalavras - 1) ? ", " : "");
+    }
+    printf("\n");
+}
+
+void ordenarSites(List *sitesEncontrados) {
+    if (sitesEncontrados == NULL || sitesEncontrados->length < 2) return;
+
+    int trocou;
+    Node *ptr1;
+    Node *lptr = NULL;
+
+    do {
+        trocou = 0;
+        ptr1 = sitesEncontrados->first;
+        while (ptr1->next != lptr) {
+            Site *s1 = (Site*)ptr1->value;
+            Site *s2 = (Site*)ptr1->next->value;
+            if (s1->importancia < s2->importancia) {
+                void *temp = ptr1->value;
+                ptr1->value = ptr1->next->value;
+                ptr1->next->value = temp;
+                trocou = 1;
+            }
+            ptr1 = ptr1->next;
+        }
+        lptr = ptr1;
+    } while (trocou);
+}
+
+void exibirResultados(List *sitesOrdenados) {
+    if (sitesOrdenados == NULL || sitesOrdenados->length == 0) {
+        printf(RED "\n[!] Nao encontramos resultados para essa busca.\n" RESET);
+        return;
+    }
+
+    printf(BOLD YELLOW "\n>>> RESULTADOS DA BUSCA (Ordenados por Importancia) <<<\n" RESET);
+    // Usamos a nossa função de print colorido aqui
+    List_print(sitesOrdenados, (void (*)(void*))Site_print_colorido);
+    printf(BLUE "--------------------------------------------------\n" RESET);
+}
