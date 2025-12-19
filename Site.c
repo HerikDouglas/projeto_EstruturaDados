@@ -203,7 +203,7 @@ List *buscarSitesPorPalavra(Graph *g, char *termo) {
 }
 
 //minha parte
-// Definições necessárias para manipular a lista internamente// --- PARTE DA PESSOA 3: ORDENAÇÃO E EXIBIÇÃO COLORIDA ---
+// --- ORDENAÇÃO E EXIBIÇÃO COLORIDA ---
 
 // Cores ANSI para o terminal
 #define RESET   "\x1b[0m"
@@ -266,12 +266,12 @@ void ordenarSites(List *sitesEncontrados) {
 
 void exibirResultados(List *sitesOrdenados) {
     if (sitesOrdenados == NULL || sitesOrdenados->length == 0) {
-        printf(RED "\n[!] Nao encontramos resultados para essa busca.\n" RESET);
+        printf(RED "\n[!] Não encontramos resultados para essa busca.\n" RESET);
         return;
     }
 
     printf(BOLD YELLOW "\n>>> RESULTADOS DA BUSCA (Ordenados por Importancia) <<<\n" RESET);
-    // Usamos a nossa função de print colorido aqui
+    
     List_print(sitesOrdenados, (void (*)(void*))Site_print_colorido);
     printf(BLUE "--------------------------------------------------\n" RESET);
 }
