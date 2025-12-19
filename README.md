@@ -5,6 +5,7 @@
 **Discentes:**
   - Herik Douglas Oliveira Reinaldo
   - Pedro Matheus dos Santos Souza
+  - João Alison de Sousa Martins
 
 ## Visão Geral 
 
@@ -63,6 +64,9 @@ Essa estrutura é utilizada como vértice no grafo.
 - `void  imprimirImportancia(Graph *g);`
 - `void  graph_lerArquivo(Graph *g, const char *nomeArquivo);`
 - `List *buscarSitesPorPalavra(Graph *g, char *termo);`
+- `void Site_print_colorido(Site *s);`
+- `void ordenarSites(List *sitesEncontrados);`
+- `void exibirResultados(List *sitesOrdenados);`
 
 ## Compilação e Execução
 **Compilação Manual**
