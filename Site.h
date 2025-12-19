@@ -19,7 +19,6 @@ void  Graph_calcularImportancia(Graph *g);
 void  imprimirImportancia(Graph *g);
 void  graph_lerArquivo(Graph *g, const char *nomeArquivo);
 List *buscarSitesPorPalavra(Graph *g, char *termo);
-//minha parte
 void ordenarSites(List *sitesEncontrados);
 void exibirResultados(List *sitesOrdenados);
 void Site_print_colorido(Site *s);
