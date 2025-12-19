@@ -4,12 +4,11 @@
 
 **Discentes:**
   - Herik Douglas Oliveira Reinaldo
+  - Pedro Matheus dos Santos Souza
 
 ## Visão Geral 
 
-Este projeto tem como objetivo aplicar conceitos fundamentais de grafos utilizando a linguagem C.
-O sistema modela um conjunto de sites como vértices e suas relações como arestas, permitindo inserção, comparação, impressão e operações básicas de análise.
-Este projeto foi desenvolvido no contexto da disciplina de Estrutura de Dados e tem como objetivo aplicar conceitos fundamentais de grafos utilizando a linguagem C. 
+Este projeto foi desenvolvido no contexto da disciplina de Estrutura de Dados e tem como objetivo aplicar conceitos fundamentais de grafos utilizando a linguagem C.
 O sistema modela um conjunto de sites como vértices e suas relações como arestas, permitindo inserção, comparação, impressão e operações básicas de análise.
 
 A implementação prioriza modularidade, clareza de código e boas práticas de versionamento com Git/GitHub, viabilizando o trabalho colaborativo em equipe.
@@ -20,6 +19,7 @@ A implementação prioriza modularidade, clareza de código e boas práticas de 
 - Integrar lista de sites ao grafo
 - Aplicação dos conceitos de ponteiros, TADs e modularização
 - Praticar colaboração em equipe via GitHub
+- Ter layout intuitivo ao usuário por meio do uso de cores no terminal
 
 ## Estrutura do projeto
 ```
@@ -61,6 +61,7 @@ Essa estrutura é utilizada como vértice no grafo.
 - `void  Graph_calcularImportancia(Graph *g);`
 - `void  imprimirImportancia(Graph *g);`
 - `void  graph_lerArquivo(Graph *g, const char *nomeArquivo);`
+- `List *buscarSitesPorPalavra(Graph *g, char *termo);`
 
 ## Compilação e Execução
 **Compilação Manual**
@@ -88,8 +89,7 @@ Este projeto contribuiu para consolidar o aprendizado prático sobre estruturas 
 A sua construção contribui diretamente para o entendimento de como diferentes Tipos Abstratos de Dados (TADs), como listas e grafos que foram utilizados, 
 podem ser integrados para formar estruturas mais complexas, reforçando conceitos de modularização, uso de ponteiros e organização do código.
 
-Além disso, o desenvolvimento colaborativo por meio do GitHub proporcionou experiência prática em controle de versão, trabalho em equipe e integração de contribuições, 
-aproximando os participantes de práticas adotadas em ambientes profissionais de desenvolvimento de software. 
+Além disso, o desenvolvimento colaborativo por meio do GitHub proporcionou experiência prática em controle de versão, trabalho em equipe e integração de contribuições, aproximando os participantes de práticas adotadas em ambientes profissionais de desenvolvimento de software. 
 Dessa forma, o projeto prepara os integrantes para desafios mais avançados em programação.
 
 #
