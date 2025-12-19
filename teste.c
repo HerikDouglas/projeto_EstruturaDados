@@ -3,7 +3,7 @@
 #include <unistd.h> // Biblioteca para a função sleep no Linux
 //#include <windows.h> Se for usar em um computador com Windows (Code::Blocks ou Dev-C++), e use Sleep(2000)
 #include "Site.h"
-#include "List.h"
+// #include "List.h"
 //#include "Graph.h"
 
 int main() {

@@ -4,19 +4,6 @@
 #include "List.h"
 #include "Site.h"
 
-typedef struct Node Node;
-
-struct Node {
-    void *value;
-    Node *next;
-};
-
-struct List {
-    int length;
-    Node *first;
-    Node *last;
-};
-
 List *List_alloc() {
     List *l = malloc(sizeof(List));
 

@@ -1,3 +1,6 @@
+#ifndef GRAPH_H
+#define GRAPH_H
+
 #include "List.h"
 
 typedef struct Graph Graph; 
@@ -38,3 +41,5 @@ Vertex *Graph_find(Graph *g, int label);
 Vertex *Graph_findByValue(Graph *g, void *value, int (*cmp)(void*,void*));
 void   *Graph_removeVertex(Graph *g, int label);
 void   *Graph_removeEdge(Graph *g, int label1, int label2);
+
+#endif

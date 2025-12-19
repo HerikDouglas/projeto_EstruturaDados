@@ -2,7 +2,6 @@
 #include <string.h>
 #include <stdlib.h>
 #include "Site.h"
-#include "List.h"
 
 // Cores ANSI para o terminal
 #define RESET   "\x1b[0m"
