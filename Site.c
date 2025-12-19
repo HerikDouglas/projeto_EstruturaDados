@@ -76,7 +76,7 @@ void Graph_insertLink(Graph *g, Site *origem, Site *destino, int peso){
 void Graph_calcularImportancia(Graph *g){
     if (!g) return;
 
-    // 1. Zera a importância de todos os sites primeiro
+    //zera a importância de todos os sites primeiro
     Vertex *v = g->first;
     while (v) {
         Site *s = (Site*) v->value;
@@ -84,14 +84,14 @@ void Graph_calcularImportancia(Graph *g){
         v = v->next;
     }
 
-    // 2. Percorre o grafo somando pesos nos destinos
+    //percorre o grafo somando pesos nos destinos
     v = g->first;
     while (v) {
-        // Para cada vértice, percorre suas arestas (links de saída)
+        //para cada vértice, percorre suas arestas (links de saída)
         Edge *e = v->first;
         while (e) {
-            // e->head é o vértice de destino
-            // e->value é o peso (conforme Graph_insertLink em Site.c)
+            //e->head é o vértice de destino
+            //e->value é o peso
             
             Vertex *destino = e->head;
             int *peso = (int*) e->value;
@@ -99,7 +99,7 @@ void Graph_calcularImportancia(Graph *g){
             if (destino && peso) {
                 Site *siteDestino = (Site*) destino->value;
                 
-                // Regra: Soma dos pesos das arestas que CHEGAM
+                //soma dos pesos das arestas que CHEGAM
                 siteDestino->importancia += *peso;
             }
             e = e->next;
@@ -181,18 +181,17 @@ List *buscarSitesPorPalavra(Graph *g, char *termo) {
     
     if (!g || !termo) return resultados;
 
-    // Acessando a estrutura interna do grafo conforme padrão visto em Site.c
+    //acessando a estrutura interna do grafo
     Vertex *v = g->first; 
 
     while (v) {
         Site *s = (Site*) v->value;
         
-        // Verifica se a palavra está na lista de palavras-chave do site
+        //verifica se a palavra está na lista de palavras-chave do site
         for (int i = 0; i < s->qtdPalavras; i++) {
-            // Comparação de string segura
             if (strcmp(s->palavras[i], termo) == 0) {
                 List_insert(resultados, s);
-                break; // Palavra encontrada, não precisa verificar as outras deste site
+                break; //se palavra encontrada, não precisa verificar as outras deste site
             }
         }
         
