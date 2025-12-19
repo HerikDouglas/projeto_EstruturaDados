@@ -22,6 +22,6 @@ List *buscarSitesPorPalavra(Graph *g, char *termo);
 //minha parte
 void ordenarSites(List *sitesEncontrados);
 void exibirResultados(List *sitesOrdenados);
-
+void Site_print_colorido(Site *s);
 
 #endif
