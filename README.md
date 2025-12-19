@@ -37,6 +37,7 @@ Os arquivos do projeto estão organizados na raiz do repositório, concentrando 
 
 ## Descriçao dos arquivos
 - **Graph.h / Graph.c**: Definição e implementação do TAD Grafo, feitos em aula.
+- **List.c / List.h**: Definição e implementação do TAD Lista, feitos em aula.
 - **Site.h / Site.c**: Definição da estrutura `Site` e funções associadas.
 - **teste.c**: Função principal responsável por testar e integrar os módulos.
 - **listSites.txt**:  Arquivo contendo o nome dos sites, palavras chave e relação com pesos entre sites.
