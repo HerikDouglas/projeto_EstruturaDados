@@ -1,7 +1,17 @@
 #include <stdio.h>
-#include "Site.h"
 #include <string.h>
 #include <stdlib.h>
+#include "Site.h"
+#include "List.h"
+
+// Cores ANSI para o terminal
+#define RESET   "\x1b[0m"
+#define BOLD    "\x1b[1m"
+#define GREEN   "\x1b[32m"
+#define YELLOW  "\x1b[33m"
+#define BLUE    "\x1b[34m"
+#define CYAN    "\x1b[36m"
+#define RED     "\x1b[31m"
 
 Site *Site_alloc(char *nome, char palavras[][30], int qtdPalavras){
     Site *s = malloc(sizeof(Site));
@@ -201,30 +211,9 @@ List *buscarSitesPorPalavra(Graph *g, char *termo) {
     return resultados;
 }
 
-//minha parte
 // --- ORDENAÇÃO E EXIBIÇÃO COLORIDA ---
 
-// Cores ANSI para o terminal
-#define RESET   "\x1b[0m"
-#define BOLD    "\x1b[1m"
-#define GREEN   "\x1b[32m"
-#define YELLOW  "\x1b[33m"
-#define BLUE    "\x1b[34m"
-#define CYAN    "\x1b[36m"
-#define RED     "\x1b[31m"
-
 // Definição das estruturas internas da Lista (necessário para a ordenação)
-typedef struct Node Node;
-struct Node {
-    void *value;
-    Node *next;
-};
-
-struct List {
-    int length;
-    Node *first;
-    Node *last;
-};
 
 void Site_print_colorido(Site *s) {
     printf(BLUE "--------------------------------------------------\n" RESET);
